@@ -65,7 +65,7 @@ def pixelate(original_image: Image, square_size: int, should_be_bw: bool):
 
 
 def main():
-    '''Main function. '''
+    '''Main function.'''
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--from_path',
