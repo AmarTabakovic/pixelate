@@ -2,6 +2,11 @@
 
 Pixelates images. Just a fun evening project.
 
+**Before:**
+![Before](docs/example-before.jpg)
+
+**After:**
+![After](docs/example-after.jpg)
 ## Usage
 
 ```plaintext
@@ -13,3 +18,4 @@ Arguments:
 - `square_size` The size of a single square as an integer.
 
 All required packages are in `requirements.txt`.
+
