@@ -4,20 +4,21 @@ import argparse
 PROGRAM_NAME = 'pixelate'
 
 
-def pixelate(original_image: Image, square_size: int, should_be_bw: bool):
+def pixelate(original_image: Image, square_size: int, should_be_greyscale: bool):
     '''
     Returns a new PIL Image that contains the pixelated original image
-    with pixels of square_size size and in black and white if bw is true.
+    with pixels of square_size size and in greyscale if should_be_greyscale 
+    is true.
 
     The image is cropped to be a multiple of square_size wide and tall.
 
     Arguments:
         original_image (Image): The image to pixelate
         square_size (int): The size of each square in the pixelated image
-        should_be_bw (bool): Whether the image should be black and white
+        should_be_greyscale (bool): Whether the image should be in greyscale
 
     Returns:
-        Image: Pixelated image (potentially in black and white)
+        Image: Pixelated image of the original image (potentially in black and white)
     '''
 
     square_size_squared = square_size * square_size
@@ -51,7 +52,7 @@ def pixelate(original_image: Image, square_size: int, should_be_bw: bool):
             average_g //= square_size_squared
             average_b //= square_size_squared
 
-            if should_be_bw:
+            if should_be_greyscale:
                 average_rgb = (average_r + average_g + average_b) // 3
                 average_r = average_g = average_b = average_rgb
 
@@ -80,7 +81,7 @@ def main():
                         help='Size of a single square in pixels.',
                         type=int,
                         required=True)
-    parser.add_argument('-bw', action='store_true')
+    parser.add_argument('-g', action='store_true')
     args = parser.parse_args()
 
     original_image = None
@@ -101,7 +102,7 @@ def main():
         print(f'{PROGRAM_NAME}: Square size is too big.')
         exit(1)
 
-    pixelated_image = pixelate(original_image, args.square_size, args.bw)
+    pixelated_image = pixelate(original_image, args.square_size, args.g)
 
     pixelated_image.save(args.to_path)
 
